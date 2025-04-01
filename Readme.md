@@ -1,0 +1,1 @@
+Aplicação destinada a apostas esportivas, para campeonatos de luta.
