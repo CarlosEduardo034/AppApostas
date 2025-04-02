@@ -1,3 +1,24 @@
+<?php
+    if(isset($_POST['submit'])){
+        //print_r($_POST['nome']);
+        //print_r($_POST['email']);
+        //print_r($_POST['telefone']);
+        //print_r($_POST['data_nascimento']);
+        //print_r($_POST['cpf']);
+        //print_r($_POST['senha']);
+
+        include_once('config.php');
+
+        $nome = $_POST['nome'];
+        $email = $_POST['email'];
+        $telefone = $_POST['telefone'];
+        $data_nascimento = $_POST['data_nascimento'];
+        $cpf = $_POST['cpf'];
+        $senha = $_POST['senha'];
+
+        $return = mysqli_query($conexao, "INSERT INTO usuarios(nome,email,telefone,data_nasc,cpf,senha) VALUES ('$nome','$email','$telefone','$data_nascimento','$cpf','$senha')");
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,25 +33,33 @@
         <section class="container01">
             <div class="containerCadratro">
                 <h2>Cadastre-se</h2>
-                <form action="">
+                <form action="cadastro.php" method="POST">
                     <div class="user-box">
-                        <input type="text" name="" required="">
-                        <label>Username</label>
+                        <input type="text" name="nome" id="nome" required="">
+                        <label>Nome</label>
                     </div>
                     <div class="user-box">
-                        <input type="password" name="" required="">
-                        <label>Password</label>
+                        <input type="text" name="email" id="email" required="">
+                        <label>Email</label>
                     </div>
                     <div class="user-box">
-                        <input type="password" name="" required="">
+                        <input type="text" name="telefone" id="telefone" required="">
+                        <label>Telefone</label>
+                    </div>
+                    <div class="user-box">
+                        <p class="data">Data de nascimento</p>
+                        <input type="date" name="data_nascimento" id="data_nascimento" required="">
+                    </div>
+                    <div class="user-box">
+                        <input type="text" name="cpf" id="cpf" required="">
                         <label>CPF</label>
                     </div>
                     <div class="user-box">
-                        <button>Entrar
-                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
-                                <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
-                            </svg>
-                        </button>
+                        <input type="password" name="senha" id="senha" required="">
+                        <label>Senha</label>
+                    </div>
+                    <div class="user-box">
+                        <input type="submit" name="submit" id="submit">
                     </div>
                 </form>
             </div>
@@ -117,7 +146,11 @@
         transition: .5s;
     }
 
-    .containerCadratro .user-box button{
+    .data{
+        color: white;
+    }
+
+    .containerCadratro .user-box #submit{
         padding: 10px 10px 10px 10px;
         width: 8vw;
         border-radius: 10px;
@@ -127,6 +160,8 @@
         display: flex;
         justify-content: space-around;
         transition: 0.8s;
+        background-color: white;
+        color: black;
     }
 
     .containerCadratro .user-box input:focus~label,
